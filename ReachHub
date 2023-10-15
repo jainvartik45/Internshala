@@ -1,0 +1,64 @@
+import React from 'react';
+
+const ItemCardList = ({ items }) => {
+  return (
+    <div className="item-card-list">
+      {items.map((item, index) => (
+        <ItemCard key={index} item={item} />
+      ))}
+    </div>
+  );
+};
+
+export default ItemCardList;
+
+// Create a sub-component for individual items: Create another React functional component called ItemCard. This component will be responsible for rendering an individual item card with an image and a description.
+
+import React from 'react';
+
+const ItemCard = ({ item }) => {
+  return (
+    <div className="item-card">
+      <img src={item.imageUrl} onError={(e) => e.target.src = 'default-image-url'} alt={item.description} />
+      <p>{item.description}</p>
+    </div>
+  );
+};
+
+export default ItemCard;
+
+In this component, we use the onError event handler on the img element to handle cases where the image URL is broken or not loading. If the image fails to load, it will replace the src attribute with a default image URL or a placeholder image.
+
+Styling: Style the components using CSS or a CSS-in-JS solution like styled-components to achieve the desired card layout.
+
+Usage: To use the ItemCardList component, import it in your parent component, pass the list of items as a prop, and render it. Here's an example of how to use it in another component:
+
+
+import React from 'react';
+import ItemCardList from './ItemCardList';
+
+const items = [
+  {
+    imageUrl: 'valid-image-url-1',
+    description: 'Item 1',
+  },
+  {
+    imageUrl: 'invalid-image-url',
+    description: 'Item 2',
+  },
+  {
+    imageUrl: 'valid-image-url-3',
+    description: 'Item 3',
+  },
+];
+
+function App() {
+  return (
+    <div>
+      <ItemCardList items={items} />
+    </div>
+  );
+}
+
+export default App;
+
